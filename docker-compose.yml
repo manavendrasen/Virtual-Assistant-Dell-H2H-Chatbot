@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  rasa-bot:
+    image: rasa/rasa:2.8.9-full
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./:/app:ro
+    command:
+      - run
+  # action-server:
+  #   image: rasa/rasa-sdk:2.8.2
+  #   volumes:
+  #     - ./actions:/app/actions
+  #   ports:
+  #     - "5055:5055"
