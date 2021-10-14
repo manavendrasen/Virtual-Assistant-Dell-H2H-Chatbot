@@ -1,39 +1,42 @@
 version: "2.0"
-
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-
-responses:
-  utter_cheer_up:
-    - text: "Here is something to cheer you up:"
-      image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-    - text: "Did that help you?"
-
-  utter_happy:
-    - text: "Great, carry on!"
-
-  utter_goodbye:
-    - text: "Bye"
-
-  utter_iamabot:
-    - text: "I am a bot, powered by Rasa."
-
-  utter_ask_mood:
-    - text: "How is your mood"
-      buttons:
-        - title: "great"
-          payload: "/mood_great"
-        - title: "not great"
-          payload: "/mood_unhappy"
-
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+intents:
+  - greet
+  - inform_order_number
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+
+entities:
+  - order_number
+
+slots:
+  order_number:
+    type: text
+    influence_conversation: true
+
+responses:
+  utter_greet_user:
+    - text: |-
+        Hi, I’m the Dell Support Assistant, an automated chat service here to assist you. \  \n
+        I am always learning new topics. If I don’t understand something you can transfer to a live agent for more help. \  \n
+        For your privacy, please do not type any sensitive or confidential details in the chat conversation.
+      buttons:
+        - title: Resolve issue using Order ID
+          payload: /inform_order_number
+        - title: Bulk Update
+          payload: /inform_order_number
+  utter_iamabot:
+    - text: I am a bot, powered by Rasa.
+  utter_ask_order_id:
+    - text: What is the Order ID?
+  utter_goodbye:
+    - text: Thanks you
+
+actions:
+  - utter_ask_order_id
+  - utter_greet_user

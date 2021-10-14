@@ -1,19 +1,30 @@
 version: "2.0"
 
 stories:
-  - story: happy path
-    steps:
-      - intent: greet
-      - action: utter_ask_mood
-      - intent: mood_great
-      - action: utter_happy
+  # - story: happy path
+  #   steps:
+  #     - intent: greet
+  #     - action: utter_greet_user
+  #     - intent: mood_great
+  #     - action: utter_happy
 
-  - story: sad path 1
+  # - story: sad path 1
+  #   steps:
+  #     - intent: greet
+  #     - action: utter_greet_user
+  #     - intent: mood_unhappy
+  #     - action: utter_cheer_up
+  #     - action: utter_did_that_help
+  #     - intent: affirm
+  #     - action: utter_happy
+
+  - story: happy path - order number
     steps:
       - intent: greet
-      - action: utter_ask_mood
-      - intent: mood_unhappy
-      - action: utter_cheer_up
-      - action: utter_did_that_help
-      - intent: affirm
-      - action: utter_happy
+      - action: utter_greet_user
+      - action: utter_ask_order_id
+      - intent: inform_order_number
+        entities:
+          - order_number: "123145"
+      - slot_was_set:
+          - order_number: "123145"
