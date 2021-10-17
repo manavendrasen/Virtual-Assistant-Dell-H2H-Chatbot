@@ -3,10 +3,10 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- greet
-- inform_email
-- inform_order_number
 - inform_zip_code
+- greet
+- inform_order_number
+- inform_email
 - goodbye
 - affirm
 - deny

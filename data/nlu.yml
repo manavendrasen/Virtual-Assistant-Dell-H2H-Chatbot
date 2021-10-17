@@ -75,6 +75,8 @@ nlu:
     - [20003](order_number)
     - the order id is [20004](order_number)
     - [20004](order_number)
+    - [20018](order_number)
+    - [20016](order_number)
 - intent: inform_email
   examples: |
     - example342@test.com
@@ -90,6 +92,7 @@ nlu:
     - [312541](zip_code)
     - [491051](zip_code) is the zipcode
     - i use the zip (303001)[zip_code]
+    - the value is [486001](zip_code)
 - regex: order_number
   examples: |
     - /d{5}

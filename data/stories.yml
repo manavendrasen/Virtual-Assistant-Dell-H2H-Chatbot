@@ -18,7 +18,7 @@ stories:
       - slot_was_set:
           - issueId: "100"
       - slot_was_set:
-          - errorName: order_email
+          - errorName: "Email"
       - slot_was_set:
           - hasError: True
       - action: utter_ask_update_value
@@ -89,7 +89,7 @@ stories:
       - slot_was_set:
           - errorID: 101
       - slot_was_set:
-          - errorName: zipCode
+          - errorName: "Zip Code"
       - action: utter_ask_update_value
       - intent: inform_zip_code
         entities:
@@ -97,6 +97,52 @@ stories:
       - slot_was_set:
           - zip_code: "496001"
       - action: action_update_order
+      - action: utter_goodbye
+  #   - story: interactive_story_2
+  #     steps:
+  #       - intent: greet
+  #       - action: utter_greet_user
+  #       - action: utter_ask_order_id
+  #       - intent: inform_order_number
+  #         entities:
+  #           - order_number: "20004"
+  #       - slot_was_set:
+  #           - order_number: "20004"
+  #       - action: action_is_user_using_whatsapp
+  #       - action: action_fetch_order
+  #       - slot_was_set:
+  #           - hasError: true
+  #       - slot_was_set:
+  #           - issueId: 534
+  #       - slot_was_set:
+  #           - errorID: 100
+  #       - slot_was_set:
+  #           - errorName: orderEmail
+  #       - action: utter_ask_update_value
+  #       - intent: inform_email
+  #         entities:
+  #           - email: ma@gmail.com
+  #       - slot_was_set:
+  #           - email: ma@gmail.com
+  #       - action: action_update_order
+  #       - action: utter_goodbye
+
+  - story: interactive_story_1
+    steps:
+      - intent: greet
+      - action: utter_greet_user
+      - action: utter_ask_order_id
+      - intent: inform_order_number
+        entities:
+          - order_number: "20018"
+      - slot_was_set:
+          - order_number: "20018"
+      - action: action_is_user_using_whatsapp
+      - slot_was_set:
+          - isOnWhatsapp: false
+      - action: action_fetch_order
+      - slot_was_set:
+          - hasError: false
       - action: utter_goodbye
 
   - story: interactive_story_2
@@ -106,24 +152,26 @@ stories:
       - action: utter_ask_order_id
       - intent: inform_order_number
         entities:
-          - order_number: "20004"
+          - order_number: "20016"
       - slot_was_set:
-          - order_number: "20004"
+          - order_number: "20016"
       - action: action_is_user_using_whatsapp
+      - slot_was_set:
+          - isOnWhatsapp: false
       - action: action_fetch_order
       - slot_was_set:
           - hasError: true
       - slot_was_set:
-          - issueId: 534
+          - issueId: 542
       - slot_was_set:
-          - errorID: 100
+          - errorID: 101
       - slot_was_set:
-          - errorName: orderEmail
+          - errorName: Zip Code
       - action: utter_ask_update_value
-      - intent: inform_email
+      - intent: inform_zip_code
         entities:
-          - email: ma@gmail.com
+          - zip_code: "486001"
       - slot_was_set:
-          - email: ma@gmail.com
+          - zip_code: "486001"
       - action: action_update_order
       - action: utter_goodbye

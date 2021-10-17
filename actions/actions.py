@@ -78,9 +78,14 @@ class UpdateOrderDetails(Action):
 
         try: 
             result = requests.post(f"https://nameless-gorge-89729.herokuapp.com/orders/{orderNumber}/{issueId}/{errorID}", json=data)
-            dispatcher.utter_message(
-                text=f"{errorName.capitalize()} Updated Successfully"
-            )   
+            if(errorID == 102):
+                dispatcher.utter_message(
+                text=f"Email in Fraud List."
+                ) 
+            else: 
+                dispatcher.utter_message(
+                    text=f"{errorName.capitalize()} Updated Successfully"
+                )   
             
         except: 
             dispatcher.utter_message(
@@ -141,7 +146,7 @@ class IsUserUsingWhatsapp(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         print(tracker.get_latest_input_channel())
-        if("twilio" in tracker.get_latest_input_channel()):
+        if(tracker.get_latest_input_channel() == "twilio"):
             return [SlotSet("isOnWhatsapp", True)]
         else:
             return [SlotSet("isOnWhatsapp", False)]
