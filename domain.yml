@@ -1,42 +1,65 @@
-version: "2.0"
+version: '2.0'
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
 intents:
-  - greet
-  - inform_order_number
-  - goodbye
-  - affirm
-  - deny
-  - bot_challenge
-
+- greet
+- inform_email
+- inform_order_number
+- inform_zip_code
+- goodbye
+- affirm
+- deny
+- bot_challenge
 entities:
-  - order_number
-
+- email
+- order_number
+- zip_code
 slots:
   order_number:
     type: text
     influence_conversation: true
-
+  issueId:
+    type: text
+    influence_conversation: true
+  errorID:
+    type: text
+    influence_conversation: true
+  errorName:
+    type: text
+    influence_conversation: true
+  email:
+    type: text
+    influence_conversation: true
+  zip_code:
+    type: text
+    influence_conversation: true
+  hasError:
+    type: bool
+    influence_conversation: true
+  isOnWhatsapp:
+    type: bool
+    influence_conversation: true
 responses:
   utter_greet_user:
-    - text: |-
-        Hi, I’m the Dell Support Assistant, an automated chat service here to assist you. \  \n
-        I am always learning new topics. If I don’t understand something you can transfer to a live agent for more help. \  \n
-        For your privacy, please do not type any sensitive or confidential details in the chat conversation.
-      buttons:
-        - title: Resolve issue using Order ID
-          payload: /inform_order_number
-        - title: Bulk Update
-          payload: /inform_order_number
+  - text: Hi, I’m the Dell Support Assistant on Whatsapp, an automated chat service here to assist you.
+    channel: twilio
+  - text: Hi, I’m the Dell Support Assistant, an automated chat service here to assist you.
   utter_iamabot:
-    - text: I am a bot, powered by Rasa.
+  - text: I am a bot, powered by Rasa.
   utter_ask_order_id:
-    - text: What is the Order ID?
+  - text: What is the Order ID?
   utter_goodbye:
-    - text: Thanks you
-
+  - text: Thanks you for using Dell Support Bot.
+  utter_ask_update_value:
+  - text: Please enter the new value to be updated.
 actions:
-  - utter_ask_order_id
-  - utter_greet_user
+- action_fetch_order
+- action_fetch_order_for_customer
+- action_hello_world
+- action_is_user_using_whatsapp
+- action_update_order
+- utter_ask_order_id
+- utter_ask_update_value
+- utter_goodbye
+- utter_greet_user

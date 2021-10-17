@@ -17,6 +17,14 @@ nlu:
     - good afternoon
     - open
     - start
+    - Heyyy
+    - Hi Bot
+    - HELLO Bot
+    - help Bot
+    - help
+    - Talk to me
+    - Dell start
+    - i have an issue
 - intent: goodbye
   examples: |
     - good afternoon
@@ -55,14 +63,36 @@ nlu:
     - am I talking to a human?
 - intent: inform_order_number
   examples: |
-    - order id is [123456](order_number)
-    - the order id is [123456](order_number)
-    - [123456](order_number)
-    - it's order #[123456](order_number)
-    - #[123456](order_number)
-    - my order id is #[123456](order_number)
-    - the order id is #[123145](order_number)
-    - [098251](order_number)
+    - order id is [12345](order_number)
+    - the order id is [12345](order_number)
+    - [12345](order_number)
+    - it's order [12345](order_number)
+    - my order id is [12345](order_number)
+    - the order id is [12314](order_number)
+    - [09825](order_number)
+    - my order id is [13141](order_number)
+    - [41235](order_number)
+    - [20003](order_number)
+    - the order id is [20004](order_number)
+    - [20004](order_number)
+- intent: inform_email
+  examples: |
+    - example342@test.com
+    - manavendra43@gmail.com
+    - email is manavendra43@gmail.com
+    - the new email is manavendrasen@gmal.com
+    - ma@gmail.com
+- intent: inform_zip_code
+  examples: |
+    - the zipcode is [496001](zip_code)
+    - zipcode is [496001](zip_code)
+    - it is [303001](zip_code)
+    - [312541](zip_code)
+    - [491051](zip_code) is the zipcode
+    - i use the zip (303001)[zip_code]
 - regex: order_number
+  examples: |
+    - /d{5}
+- regex: zip_code
   examples: |
     - /d{6}

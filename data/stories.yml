@@ -1,22 +1,36 @@
 version: "2.0"
 
 stories:
-  # - story: happy path
-  #   steps:
-  #     - intent: greet
-  #     - action: utter_greet_user
-  #     - intent: mood_great
-  #     - action: utter_happy
-
-  # - story: sad path 1
-  #   steps:
-  #     - intent: greet
-  #     - action: utter_greet_user
-  #     - intent: mood_unhappy
-  #     - action: utter_cheer_up
-  #     - action: utter_did_that_help
-  #     - intent: affirm
-  #     - action: utter_happy
+  - story: unhappy path - order number - email
+    steps:
+      - intent: greet
+      - action: utter_greet_user
+      - action: utter_ask_order_id
+      - intent: inform_order_number
+        entities:
+          - order_number: "41235"
+      - slot_was_set:
+          - order_number: "41231"
+      - action: action_is_user_using_whatsapp
+      - slot_was_set:
+          - isOnWhatsapp: False
+      - action: action_fetch_order
+      - slot_was_set:
+          - issueId: "100"
+      - slot_was_set:
+          - errorName: order_email
+      - slot_was_set:
+          - hasError: True
+      - action: utter_ask_update_value
+      - intent: inform_email
+        entities:
+          - email: manavendra43@gmail.com
+      - slot_was_set:
+          - email: manavendra43@gmail.com
+      - slot_was_set:
+          - isOnWhatsapp: False
+      - action: action_update_order
+      - action: utter_goodbye
 
   - story: happy path - order number
     steps:
@@ -25,6 +39,91 @@ stories:
       - action: utter_ask_order_id
       - intent: inform_order_number
         entities:
-          - order_number: "123145"
+          - order_number: "41231"
       - slot_was_set:
-          - order_number: "123145"
+          - order_number: "41231"
+      - action: action_is_user_using_whatsapp
+      - slot_was_set:
+          - isOnWhatsapp: False
+      - action: action_fetch_order
+      - slot_was_set:
+          - hasError: False
+      - action: utter_goodbye
+
+  - story: customer end - happy
+    steps:
+      - intent: greet
+      - action: utter_greet_user
+      - intent: greet
+      - action: utter_greet_user
+      - action: utter_ask_order_id
+      - intent: inform_order_number
+        entities:
+          - order_number: "41231"
+      - slot_was_set:
+          - order_number: "41231"
+      - action: action_is_user_using_whatsapp
+      - slot_was_set:
+          - isOnWhatsapp: True
+      - action: action_fetch_order_for_customer
+      - action: utter_goodbye
+
+  - story: unhappy path - order number by zipcode
+    steps:
+      - intent: greet
+      - action: utter_greet_user
+      - action: utter_ask_order_id
+      - intent: inform_order_number
+        entities:
+          - order_number: "20003"
+      - slot_was_set:
+          - order_number: "20003"
+      - action: action_is_user_using_whatsapp
+      - slot_was_set:
+          - isOnWhatsapp: False
+      - action: action_fetch_order
+      - slot_was_set:
+          - hasError: true
+      - slot_was_set:
+          - issueId: 533
+      - slot_was_set:
+          - errorID: 101
+      - slot_was_set:
+          - errorName: zipCode
+      - action: utter_ask_update_value
+      - intent: inform_zip_code
+        entities:
+          - zip_code: "496001"
+      - slot_was_set:
+          - zip_code: "496001"
+      - action: action_update_order
+      - action: utter_goodbye
+
+  - story: interactive_story_2
+    steps:
+      - intent: greet
+      - action: utter_greet_user
+      - action: utter_ask_order_id
+      - intent: inform_order_number
+        entities:
+          - order_number: "20004"
+      - slot_was_set:
+          - order_number: "20004"
+      - action: action_is_user_using_whatsapp
+      - action: action_fetch_order
+      - slot_was_set:
+          - hasError: true
+      - slot_was_set:
+          - issueId: 534
+      - slot_was_set:
+          - errorID: 100
+      - slot_was_set:
+          - errorName: orderEmail
+      - action: utter_ask_update_value
+      - intent: inform_email
+        entities:
+          - email: ma@gmail.com
+      - slot_was_set:
+          - email: ma@gmail.com
+      - action: action_update_order
+      - action: utter_goodbye
