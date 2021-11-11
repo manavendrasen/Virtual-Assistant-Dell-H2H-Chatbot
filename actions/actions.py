@@ -28,6 +28,12 @@ class FetchOrderDetails(Action):
 
             # if error
             if "issueId" in result.keys():
+                print(result['errorId'], result['errorId'] == 102)
+                if(result['errorId'] == 102):
+                    msg = "The email has been found in the fraud list."
+                    dispatcher.utter_message(text=msg)
+                    return [SlotSet("hasError", True), SlotSet("isFraudEmail", True)]
+
                 dispatcher.utter_message(
                     text=f"Order in ON-HOLD, Issue: {result['errorName'].capitalize()} is invalid"
                 )
@@ -58,6 +64,7 @@ class UpdateOrderDetails(Action):
         errorID = tracker.get_slot("errorID")
         errorName = tracker.get_slot("errorName")
 
+        print("In Update:", errorID, errorID == 102)
         if(errorID == 100):
             email = tracker.get_slot("email")
             data={"orderEmail": email}
@@ -67,8 +74,6 @@ class UpdateOrderDetails(Action):
             data={"zipCode": int(zip_code)}
 
         elif(errorID == 102):
-            msg = "The email has been found in the fraud list."
-            dispatcher.utter_message(text=msg)
             return []
 
         if not orderNumber:
@@ -77,12 +82,8 @@ class UpdateOrderDetails(Action):
             return []
 
         try: 
-            result = requests.post(f"https://nameless-gorge-89729.herokuapp.com/orders/{orderNumber}/{issueId}/{errorID}", json=data)
-            if(errorID == 102):
-                dispatcher.utter_message(
-                text=f"Email in Fraud List."
-                ) 
-            else: 
+            if(errorID != 102):
+                result = requests.post(f"https://nameless-gorge-89729.herokuapp.com/orders/{orderNumber}/{issueId}/{errorID}", json=data)
                 dispatcher.utter_message(
                     text=f"{errorName.capitalize()} Updated Successfully"
                 )   
